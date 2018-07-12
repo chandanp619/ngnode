@@ -1,0 +1,40 @@
+<div class="admin-container" *ngIf="AuthStatus">
+    <div class="row" >
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header"> </div>
+              <ul class="nav navbar-nav">
+                  <li><a routerLink="/dashboard">Dashboard</a></li>
+                  <li><a routerLink="/dashboard/posts">Posts</a></li>
+                  <li><a routerLink="/dashboard/pages">Pages</a></li>
+                  <li><a routerLink="/dashboard/media">Media</a></li>
+                  <li><a routerLink="/dashboard/users">Users</a></li>
+                  <li><a routerLink="/dashboard/users/logout">Logout</a> </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="row" >
+          <h2 class="text-center">Users <small><a routerLink="/dashboard/users/add">Add New</a></small></h2>
+        </div>
+    <div class="row">
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th width="30%">USERNAME</th>
+          <th width="30%">EMAIL</th>
+          <th width="20%">TYPE</th>
+          <th width="20%">ACTIONS</th>
+        </tr>
+        <tr *ngFor="let user of Users">
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.usertype}}</td>
+          <td>
+            <a class="action-link" routerLink="/dashboard/users/edit/{{user._id}}">Edit</a>
+            <a class="action-link" routerLink="/dashboard/users/delete/{{user._id}}">Delete</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  
+  </div>

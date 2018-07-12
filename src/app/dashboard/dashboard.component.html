@@ -1,0 +1,32 @@
+<div class="admin-container">
+
+  <div class="row" *ngIf="!AuthStatus">
+    <div class="statusmsg" >{{AuthStatusMessage}}</div>
+    <form novalidate>
+      <p><input type="text" name="username" id="username" [(ngModel)]="model.username" placeholder="User Name"  /></p>
+      <p><input type="password" name="password" id="password" [(ngModel)]="model.password" placeholder="Password" /></p>
+      <p><button type="submit" class="btn-default" (click)="submitLogin()">Login</button></p>
+    </form>
+
+  </div>
+  <div class="row" *ngIf="AuthStatus">
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header"> </div>
+            <ul class="nav navbar-nav">
+                <li><a routerLink="/dashboard">Dashboard</a></li>
+                <li><a routerLink="/dashboard/posts">Posts</a></li>
+                <li><a routerLink="/dashboard/pages">Pages</a></li>
+                <li><a routerLink="/dashboard/media">Media</a></li>
+                <li><a routerLink="/dashboard/users">Users</a></li>
+                <li><a routerLink="/dashboard/users/logout">Logout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="row" >
+        <h2 class="text-center">Welcome to Admin Panel</h2>
+        <p>Login Successfull!!!</p>
+      </div>
+
+</div>
