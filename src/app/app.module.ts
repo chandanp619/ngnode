@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
+import {DataTableModule} from "angular-6-datatable";
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { UsersComponent } from './dashboard/users/users.component';
 import { LogoutComponent } from './dashboard/users/logout/logout.component';
 import { AddusersComponent } from './dashboard/users/addusers.component';
 import { EditUsersComponent } from './dashboard/users/edit-users/edit-users.component';
+import { DeleteuserComponent } from './dashboard/users/deleteuser.component';
 
 
 @NgModule({
@@ -31,11 +33,13 @@ import { EditUsersComponent } from './dashboard/users/edit-users/edit-users.comp
     LogoutComponent,
     AddusersComponent,
     EditUsersComponent,
+    DeleteuserComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    DataTableModule,
     FormsModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

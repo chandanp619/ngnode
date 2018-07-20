@@ -22,14 +22,16 @@
     <div class="col-md-4 text-center">
                 {{StatusMessage}}
                 <form novalidate >
+
                 <p>Username: <input type="text" class="form-control" name="username" id="username" [(ngModel)]="model.username" placeholder="Username" /></p>
                 <p>Password: <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" placeholder="Password" /></p>
                 <p>Email: <input type="email" class="form-control" name="email" id="email" [(ngModel)]="model.email" placeholder="Email" /></p>
                 <p>User Type: <select class="form-control" name="usertype" id="usertype" [(ngModel)]="model.usertype" placeholder="User Type">
-                    <option value="user">User</option>
-                    <option value="administrator">Administrator</option>
+                    <option value="user" [attr.selected]="model.usertype=='user'? true : null">User</option>
+                    <option value="administrator" [attr.selected]="model.usertype=='administrator'? true : null">Administrator</option>
                 </select></p>
                 <p>
+                  <input type="hidden" name="_id" id="_id" [(ngModel)]="model._id" />
                   <button type="submit" class="button button-default" name="submt" id="submt" (click)="submtUpdtUser()">Submit</button></p>
                 </form>
      

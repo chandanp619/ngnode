@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditUsersComponent implements OnInit {
   userData:any;
-  model:any = {};
+  model:any;
   AuthStatus:any;
   StatusMessage:any;
   constructor(private router:Router, private route:ActivatedRoute, private _http:HttpClient){
@@ -33,10 +33,11 @@ export class EditUsersComponent implements OnInit {
     
     var userID = this.route.snapshot.params.id;
   
-    this._http.get('/api/getUser/'+userID).subscribe((response:Response) => {
+    this._http.get('/api/getUser/'+userID).subscribe((response) => {
       this.userData = response;
       this.model = response;
-      console.log(response);
+      console.log('UserID:'+userID);
+      console.log('Angular Userdata:'+response);
     });
 
 

@@ -18,14 +18,10 @@
           <h2 class="text-center">Users <small><a routerLink="/dashboard/users/add">Add New</a></small></h2>
         </div>
     <div class="row">
-      <table class="table table-bordered table-hover">
-        <tr>
-          <th width="30%">USERNAME</th>
-          <th width="30%">EMAIL</th>
-          <th width="20%">TYPE</th>
-          <th width="20%">ACTIONS</th>
-        </tr>
-        <tr *ngFor="let user of Users">
+      <table class="table table-bordered table-hover" [mfData]="Users" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <tbody>
+        
+        <tr *ngFor="let user of mf.data">
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
           <td>{{user.usertype}}</td>
@@ -34,6 +30,22 @@
             <a class="action-link" routerLink="/dashboard/users/delete/{{user._id}}">Delete</a>
           </td>
         </tr>
+      </tbody>
+        <thead>
+            <tr>
+                <th width="30%"><mfDefaultSorter by="username">USERNAME</mfDefaultSorter></th>
+                <th width="30%"><mfDefaultSorter by="email">EMAIL</mfDefaultSorter></th>
+                <th width="20%"><mfDefaultSorter by="usertype">TYPE</mfDefaultSorter></th>
+                <th width="20%">ACTIONS</th>
+              </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[10,25,50,100]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   

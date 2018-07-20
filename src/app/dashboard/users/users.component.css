@@ -2,3 +2,4 @@
 .statusmsg{ font-weight: bold; color:#f00; font-size: 10px;}
 .listTable{width:98%; border:10px solild #999;}
 .action-link{margin-left: 5px; padding:10px; background: #049; color:#fff; text-decoration: none;}
+.paginate-page{border:1px solid #999; padding:5px; margin: 4px;}

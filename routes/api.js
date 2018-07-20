@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
+var ObjectId = require('mongodb').ObjectID;
 
 
 /* GET home page. */
@@ -73,6 +73,7 @@ router.get('/logout',function(req,res, next){
 
 
 router.get('/allusers',function(req,res,next){
+
   var UserSchema = require('../model/user');
   var userModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users');
   userModel.find({}).exec(function(err,user){
@@ -92,6 +93,7 @@ router.get('/allusers',function(req,res,next){
 router.post('/addNewUser', function(req,res,next){
 
 
+  var ObjectId = require('mongodb').ObjectID;
   var UserSchema = require('../model/user');
   var userModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users');
 
@@ -100,7 +102,13 @@ router.post('/addNewUser', function(req,res,next){
   var input_usertype = req.body.usertype;
   var input_email = req.body.email;
 
-  var NewUser = new userModel({username:input_username,password:input_password,email:input_email,usertype:input_usertype});
+  var NewUser = new userModel({
+    _id:ObjectId(),
+    username:input_username,
+    password:input_password,
+    email:input_email,
+    usertype:input_usertype
+  });
 
   NewUser.save(function(err,user){
     if(err){console.log(err); res.json({"status":"Error in Adding New User"}); }
@@ -111,13 +119,32 @@ router.post('/addNewUser', function(req,res,next){
 
 router.get('/getUser/:id',function(req,res,next){
   var uid = req.params.id;
+  //res.json({_id:uid});
   var UserSchema = require('../model/user');
   var userModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users');
-  userModel.findOne({_id:uid},function(err,data){
-    if(err){res.json({"error":"User Not Found"});}
-    res.json(data);
-    console.log(data);
-  })
+      userModel.find(function(err,userdata){
+        if(err){res.json({"error":"User Not Found"});}
+        userdata.forEach(function(elem,index){
+          if(elem._id==uid){
+            res.json(elem);
+          }
+        });
+        
+      });
+});
+
+router.get('/deleteUser/:userid',function(req,res,next){
+  var uid = req.params.userid;
+  console.log('Deleting User: '+uid);
+  var UserSchema = require('../model/user');
+  var userModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users');
+      userModel.deleteOne({"_id":ObjectId(uid)},function(err,userdata){
+        if(err){res.json({"error":"User Not Found"});}
+            console.log(userdata);
+            res.json({'status':'Success'});
+         
+        
+      });
 });
 
 
@@ -131,14 +158,14 @@ router.post('/updateUser', function(req,res,next){
   var input_password = req.body.password;
   var input_usertype = req.body.usertype;
   var input_email = req.body.email;
-  var userID = req.body.id;
+  var userID = req.body._id;
 
-  var NewUser = new userModel({username:input_username,password:input_password,email:input_email,usertype:input_usertype});
-
-  NewUser.save(function(err,user){
-    if(err){console.log(err); res.json({"status":"Error in Adding New User"}); }
+  var ExistingUserNewData = {username:input_username,password:input_password,email:input_email,usertype:input_usertype};
+  console.log(ExistingUserNewData);
+  userModel.update({_id:ObjectId(userID)},ExistingUserNewData, { multi: true }, function(err,user){
+    if(err){console.log(err); res.json({"status":"Error in Updating User"}); }
     
-        res.json({"status":"User Added Successfully"});
+        res.json({"status":"User Updated Successfully",userd:user});
   });
 });
 
