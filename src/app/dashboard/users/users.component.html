@@ -1,18 +1,18 @@
 <div class="admin-container" *ngIf="AuthStatus">
     <div class="row" >
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <div class="navbar-header"> </div>
-              <ul class="nav navbar-nav">
-                  <li><a routerLink="/dashboard">Dashboard</a></li>
-                  <li><a routerLink="/dashboard/posts">Posts</a></li>
-                  <li><a routerLink="/dashboard/pages">Pages</a></li>
-                  <li><a routerLink="/dashboard/media">Media</a></li>
-                  <li><a routerLink="/dashboard/users">Users</a></li>
-                  <li><a routerLink="/dashboard/users/logout">Logout</a> </li>
-              </ul>
-            </div>
-          </nav>
+      <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+          <div class="navbar-header"> </div>
+          <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/posts">Posts</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/pages">Pages</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/media">Media</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users">Users</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users/logout">Logout</a> </li>
+          </ul>
+        </div>
+      </nav>
         </div>
         <div class="row" >
           <h2 class="text-center">Users <small><a routerLink="/dashboard/users/add">Add New</a></small></h2>

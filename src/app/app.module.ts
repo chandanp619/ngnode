@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
 import {DataTableModule} from "angular-6-datatable";
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home.component';
@@ -34,13 +34,16 @@ import { DeleteuserComponent } from './dashboard/users/deleteuser.component';
     AddusersComponent,
     EditUsersComponent,
     DeleteuserComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     DataTableModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+  
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

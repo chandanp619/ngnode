@@ -122,13 +122,14 @@ router.get('/getUser/:id',function(req,res,next){
   //res.json({_id:uid});
   var UserSchema = require('../model/user');
   var userModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users');
-      userModel.find(function(err,userdata){
+      userModel.findOne({"_id":ObjectId(uid)},function(err,userdata){
         if(err){res.json({"error":"User Not Found"});}
-        userdata.forEach(function(elem,index){
-          if(elem._id==uid){
-            res.json(elem);
-          }
-        });
+        // userdata.forEach(function(elem,index){
+        //   if(elem._id==uid){
+        //     res.json(elem);
+        //   }
+        res.json(userdata);
+        //});
         
       });
 });
@@ -159,10 +160,20 @@ router.post('/updateUser', function(req,res,next){
   var input_usertype = req.body.usertype;
   var input_email = req.body.email;
   var userID = req.body._id;
+  var metaData = req.body.meta;
+  
+  var DataMeta = [];
 
-  var ExistingUserNewData = {username:input_username,password:input_password,email:input_email,usertype:input_usertype};
+  metaData.forEach(function(element){
+    if(element.key!=""){
+      DataMeta.push(element);
+    }
+  });
+    
+
+  var ExistingUserNewData = {username:input_username,password:input_password,email:input_email,usertype:input_usertype,meta:DataMeta};
   console.log(ExistingUserNewData);
-  userModel.update({_id:ObjectId(userID)},ExistingUserNewData, { multi: true }, function(err,user){
+  userModel.update({"_id":ObjectId(userID)},ExistingUserNewData, { multi: true }, function(err,user){
     if(err){console.log(err); res.json({"status":"Error in Updating User"}); }
     
         res.json({"status":"User Updated Successfully",userd:user});
