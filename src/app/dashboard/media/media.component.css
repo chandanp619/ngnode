@@ -1,0 +1,7 @@
+.admin-container{ background:rgba(248, 247, 247,0.7); margin: 10px; padding:20px; min-height:450px;}
+.statusmsg{ font-weight: bold; color:#f00; font-size: 10px;}
+.media-container{ list-style-type: none; }
+.media-container li{ display: inline-block; overflow: hidden; max-width:200px; width:200px; height:200px;}
+.media-container li input{width:85%; padding:5px;}
+.media-container li a{width:15%; margin-left:5px;}
+.controls{ margin-top: 5px;}

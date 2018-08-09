@@ -1,0 +1,38 @@
+<div class="admin-container" *ngIf="AuthStatus">
+  <div class="container">
+<div class="row" >
+  <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+          <div class="navbar-header"> </div>
+          <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/posts">Posts</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/pages">Pages</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/media">Media</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users">Users</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users/logout">Logout</a> </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="row" >
+      <h2 class="text-center">Add New Page</h2>
+    </div>
+
+    <div class="row">
+      <form [formGroup]="addPageForm" novalidate autocomplete="off">
+          <div class="form-group">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" formControlName="title" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="username">Content:</label>
+                <textarea type="text" class="form-control" formControlName="content" id="content" name="content"></textarea>
+              </div>
+      </form>
+    </div>
+
+
+
+</div>
+</div>

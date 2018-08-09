@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{ background: url('assets/images/texture.png');}
-a{text-decoration: none; color:#ff9900;}
-a:hover{ text-decoration: underline; color:#0099ff}
+a{text-decoration: none; color:#fff;}
+a:hover{ text-decoration: underline; color:#ddd;}
 nav ul.menu li{ display: inline-block;}
+
+h2 small a{ font-size: 11px; padding:5px 10px; background-color: #049; text-decoration: none; font-weight: bold; border-radius: 4px; color:#fff;}

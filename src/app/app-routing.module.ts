@@ -13,6 +13,14 @@ import { AddusersComponent } from './dashboard/users/addusers.component';
 import { DeleteuserComponent } from './dashboard/users/deleteuser.component';
 import { EditUsersComponent } from './dashboard/users/edit-users/edit-users.component';
 
+import { PagesComponent } from './dashboard/pages/pages.component';
+import { AddPagesComponent } from './dashboard/pages/add-pages.component';
+
+import { MediaComponent } from './dashboard/media/media.component';
+import { AddMediaComponent } from './dashboard/media/add-media.component';
+import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
+
+
 const router: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
@@ -26,7 +34,16 @@ const router: Routes = [
   { path: 'dashboard/users/logout', component: LogoutComponent },
   { path: 'dashboard/users/add', component: AddusersComponent},
   { path: 'dashboard/users/edit/:id', component: EditUsersComponent},
-  { path: 'dashboard/users/delete/:id', component: DeleteuserComponent}
+  { path: 'dashboard/users/delete/:id', component: DeleteuserComponent},
+
+  { path: 'dashboard/pages', component: PagesComponent},
+  { path: 'dashboard/page/edit/:id', component: PagesComponent},
+  { path: 'dashboard/page/delete/:id', component: PagesComponent},
+  { path: 'dashboard/page/add', component: AddPagesComponent},
+
+  { path: 'dashboard/media', component: MediaComponent},
+  { path: 'dashboard/media/add', component: AddMediaComponent},
+  { path: 'dashboard/media/remove/:id', component: RemoveMediaComponent},
 ];
 
 

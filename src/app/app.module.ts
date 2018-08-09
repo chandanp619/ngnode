@@ -18,6 +18,11 @@ import { LogoutComponent } from './dashboard/users/logout/logout.component';
 import { AddusersComponent } from './dashboard/users/addusers.component';
 import { EditUsersComponent } from './dashboard/users/edit-users/edit-users.component';
 import { DeleteuserComponent } from './dashboard/users/deleteuser.component';
+import { PagesComponent } from './dashboard/pages/pages.component';
+import { AddPagesComponent } from './dashboard/pages/add-pages.component';
+import { MediaComponent } from './dashboard/media/media.component';
+import { AddMediaComponent } from './dashboard/media/add-media.component';
+import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
 
 
 @NgModule({
@@ -34,6 +39,11 @@ import { DeleteuserComponent } from './dashboard/users/deleteuser.component';
     AddusersComponent,
     EditUsersComponent,
     DeleteuserComponent,
+    PagesComponent,
+    AddPagesComponent,
+    MediaComponent,
+    AddMediaComponent,
+    RemoveMediaComponent,
     
   ],
   imports: [
