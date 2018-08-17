@@ -118,17 +118,8 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-          <form method="POST" enctype="multipart/form-data" id="mediaForm" action="" [formGroup]="MediaForm" (ngSubmit)="UploadImage();" *ngIf="model">
-            <div class="form-group">
-                <label for="lname">User Image:</label>
-                <input type="file" class="form-control" name="mediaUpload" id="mediaUpload" (change)="onFileChange($event)" >
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-danger">Upload</button>
-
-              </div>
-              
-            </form>
+            <app-media></app-media>
+          <!--  -->
 
 
 

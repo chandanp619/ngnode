@@ -23,6 +23,7 @@ import { AddPagesComponent } from './dashboard/pages/add-pages.component';
 import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media.component';
 import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
+import {Global} from './dashboard/global';
 
 
 @NgModule({
@@ -52,10 +53,9 @@ import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
     AppRoutingModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule
-  
+    ReactiveFormsModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},Global],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

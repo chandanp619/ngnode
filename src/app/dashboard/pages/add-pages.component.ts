@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-pages.component.css']
 })
 export class AddPagesComponent implements OnInit {
-
+  AuthStatus:any;
   constructor() { }
 
   ngOnInit() {

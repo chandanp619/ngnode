@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router,  ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { Global } from '../global';
 
 @Component({
   selector: 'app-media',
@@ -10,7 +12,8 @@ import { Router,  ActivatedRoute, Params } from '@angular/router';
 export class MediaComponent implements OnInit {
   Medias:any = [];
   AuthStatus:Boolean;
-  constructor( private _http:HttpClient, private router:Router) {
+  MediaForm:FormGroup;
+  constructor( private _http:HttpClient, private router:Router, private fb:FormBuilder, private global:Global) {
 
     
     this._http.get('/api/checksession').subscribe((response) => {
@@ -28,6 +31,9 @@ export class MediaComponent implements OnInit {
       this.Medias =  response;
     });
 
+    this.MediaForm = this.fb.group({
+      mediaUpload: new FormControl()
+    });
    }
 
 
@@ -40,9 +46,54 @@ export class MediaComponent implements OnInit {
       elm.style.display='block';
      }
    }
+
   ngOnInit() {
   }
 
+  UploadImage(){
+    
+    var mediaDATA = this.MediaForm.value;
+    
+    this._http.post('/api/addNewMedia',mediaDATA).subscribe( (resp:Response) => {
+      // let output = resp; 
+      // if(output.hasOwnProperty('path'))
+      // this.StatusMessage = output;
+      // console.log(JSON.stringify(this.StatusMessage));
+      console.log(resp);
+      var mi = new MediaImage(resp);
+      this.global.ImageID = mi._id;
+      this.router.navigate(["app-media"]);
+     });
+  }
 
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.MediaForm.get('mediaUpload').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        });
 
+        console.log(file);
+      };
+    }
+  }
+
+}
+
+class MediaImage{
+  _id:Object;
+  filename:String;
+  filetype:String;
+  value:Blob;
+  constructor(obj){
+    this._id = obj._id;
+    this.filename = obj.filename;
+    this.filetype = obj.filetype;
+    this.value = obj.value;
+  }
 }

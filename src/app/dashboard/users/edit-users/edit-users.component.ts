@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { Global } from '../../global';
 declare var $: any;
 
 @Component({
@@ -21,7 +22,7 @@ export class EditUsersComponent implements OnInit {
   MediaForm:FormGroup;
   meta: FormArray;
 
-  constructor(private router:Router, private route:ActivatedRoute, private _http:HttpClient, private fb:FormBuilder){
+  constructor(private router:Router, private route:ActivatedRoute, private _http:HttpClient, private fb:FormBuilder, private global:Global){
   
     this._http.get('/api/checksession').subscribe((response) => {
       if(Boolean(response)==false){
@@ -159,7 +160,8 @@ export class EditUsersComponent implements OnInit {
       // console.log(JSON.stringify(this.StatusMessage));
       console.log(resp);
       var mi = new MediaImage(resp);
-      this.EditForm.get('image').setValue(mi.value);
+      this.global.ImageID = mi._id;
+      this.EditForm.get('image').setValue(this.global.ImageID);
      });
   }
 

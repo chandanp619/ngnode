@@ -18,7 +18,21 @@
         </nav>
         </div>
         <div class="row">
+          {{global.ImageID}}
           <h2>Media <small><a routerLink="/dashboard/media/add">Add New</a></small></h2>
+        </div>
+        <div class="row">
+            <form method="POST" enctype="multipart/form-data" id="mediaForm" action="" [formGroup]="MediaForm" (ngSubmit)="UploadImage();">
+              <div class="form-group">
+                  <label for="lname">User Image:</label>
+                  <input type="file" class="form-control" name="mediaUpload" id="mediaUpload" (change)="onFileChange($event)" >
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">Upload</button>
+  
+                </div>
+                
+              </form>
         </div>
         <div class="row">
           <ul class="media-container">
