@@ -22,7 +22,6 @@ export class RemoveMediaComponent implements OnInit {
       //console.log('checksession Response:'+response.toString());
       }
     });
-
     this._http.get('/api/media/delete/'+mediaID).subscribe((response) => {
       this.global.ImageID = '';
       this.router.navigateByUrl('/dashboard/media');

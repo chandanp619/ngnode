@@ -27,6 +27,7 @@ export class MediaComponent implements OnInit {
       }
     });
 
+    
     this._http.get('/api/allmedia').subscribe((response) => {
       this.Medias =  response;
     });
