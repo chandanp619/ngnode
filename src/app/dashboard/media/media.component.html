@@ -18,32 +18,35 @@
         </nav>
         </div>
         <div class="row">
-          {{global.ImageID}}
-          <h2>Media <small><a routerLink="/dashboard/media/add">Add New</a></small></h2>
+         
+          <h2>Media</h2>
         </div>
         <div class="row">
+          
             <form method="POST" enctype="multipart/form-data" id="mediaForm" action="" [formGroup]="MediaForm" (ngSubmit)="UploadImage();">
-              <div class="form-group">
+              <div class="col-md-8">
+                <div class="form-group">
                   <label for="lname">User Image:</label>
                   <input type="file" class="form-control" name="mediaUpload" id="mediaUpload" (change)="onFileChange($event)" >
+                  <button type="submit" class="btn btn-danger">Upload</button>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-danger">Upload</button>
-  
-                </div>
-                
+              </div>
               </form>
+              
         </div>
         <div class="row">
-          <ul class="media-container">
+          <div class="col-md-12"> {{global.ImageID}}</div>
+          <div class="col-md-12">
+          <ul class="media-container" id="media-container">
               <li *ngFor="let media of Medias; let i=index">
                   <img src="data:{{media.filetype}};base64,{{media.value}}" (click)="showControl(i)" />
                   <div class="controls" id="controls-{{i}}" style="display:none;">
                       <input type="text" value="{{media._id}}" />
-                      <a class="action-link" routerLink="/dashboard/media/delete/{{media._id}}">Delete</a>
+                      <a class="action-link" routerLink="/dashboard/media/remove/{{media._id}}">Delete</a>
                   </div>
                 </li>
           </ul>
+          </div>
           <!--
             <table class="table table-bordered table-hover" [mfData]="Medias" #mf="mfDataTable" [mfRowsOnPage]="10">
               <tbody>

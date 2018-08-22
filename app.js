@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'dist/ngnode')));
 app.use('/resources', express.static(path.join(__dirname, 'resources')));
 //app.use('/', express.static(path.join(__dirname, 'dist/ngnode')));
 app.use('/api', apiRouter);
+app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

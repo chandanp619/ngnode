@@ -13,7 +13,7 @@ export class MediaComponent implements OnInit {
   Medias:any = [];
   AuthStatus:Boolean;
   MediaForm:FormGroup;
-  constructor( private _http:HttpClient, private router:Router, private fb:FormBuilder, private global:Global) {
+  constructor( private _http:HttpClient, private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder, private global:Global) {
 
     
     this._http.get('/api/checksession').subscribe((response) => {
@@ -38,12 +38,23 @@ export class MediaComponent implements OnInit {
 
 
   showControl(index){
+
+    var pelm = document.getElementById('media-container');
+    Array.from(document.querySelectorAll('.controls')).forEach(function(item){
+        (<HTMLElement>item).style.display='none';
+    });
+    
+       
+     
+
      var elm = document.getElementById('controls-'+index);
      var style = window.getComputedStyle(elm);
      if(style.display=='block'){
        elm.style.display='none';
+       this.global.ImageID = '';
      }else{
       elm.style.display='block';
+      this.global.ImageID = elm.querySelector('input').value;
      }
    }
 
@@ -62,7 +73,9 @@ export class MediaComponent implements OnInit {
       console.log(resp);
       var mi = new MediaImage(resp);
       this.global.ImageID = mi._id;
-      this.router.navigate(["app-media"]);
+      this._http.get('/api/allmedia').subscribe((response) => {
+        this.Medias =  response;
+      });
      });
   }
 

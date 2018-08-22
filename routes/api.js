@@ -6,11 +6,17 @@ var formidable = require('formidable');
 var fs = require('fs');
 
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.send('Express RESTful API');
 });
 
+/**
+ * Get a list of visible blogs
+ *
+ * @section Blogs
+ * @type get
+ * @url /blogs
+ */
 router.get('/blogs', function(req, res, next) {
   var BlogSchema = require('../model/blog');
   var BlogModel = mongoose.model('ngnode_blogs',BlogSchema.BlogSchema,'ngnode_blogs');
@@ -20,6 +26,15 @@ router.get('/blogs', function(req, res, next) {
   });
 });
 
+/**
+ * Authenticate an user
+ *
+ * @section Users
+ * @type post
+ * @url /authenticate
+ * @param {string} username 
+ * @param {string} password
+ */
 router.post('/authenticate',function(req,res, next){
   var sess = req.session;
   var input_username = req.body.username;
@@ -50,6 +65,14 @@ router.post('/authenticate',function(req,res, next){
 
 });
 
+/**
+ * Validate User Session
+ *
+ * @section Users
+ * @type get
+ * @url /checksession
+ * @param {Object} session 
+ */
 router.get('/checksession',function(req,res, next){
   var sess = req.session;
   //res.json(sess);
@@ -61,19 +84,27 @@ router.get('/checksession',function(req,res, next){
    }
 });
 
+/**
+ * User logout
+ *
+ * @section Users
+ * @type get
+ * @url /logout
+ * @param {Object} session 
+ */
 router.get('/logout',function(req,res, next){
   var sess = req.session;
   sess.email='';
   res.send(true);
 });
 
-// router.get('/setsession',function(req,res, next){
-//   var sess = req.session;
-//   sess.email = 'chandanp619@gmail.com';
-//   res.json(sess);
-// });
-
-
+/**
+ * All Users
+ *
+ * @section Users
+ * @type get
+ * @url /allusers
+ */
 router.get('/allusers',function(req,res,next){
 
   var UserSchema = require('../model/user');
@@ -91,7 +122,17 @@ router.get('/allusers',function(req,res,next){
   
 });
 
-
+/**
+ * Add New User
+ *
+ * @section Users
+ * @type post
+ * @url /addNewUser
+ * @param {String} username 
+ * @param {String} password 
+ * @param {String} usertype 
+ * @param {String} email  
+ */
 router.post('/addNewUser', function(req,res,next){
 
 
@@ -119,6 +160,14 @@ router.post('/addNewUser', function(req,res,next){
   });
 });
 
+/**
+ * Get Single User
+ *
+ * @section Users
+ * @type get
+ * @url /getUser/:id  
+ * @param {ObjectID} id  
+ */
 router.get('/getUser/:id',function(req,res,next){
   var uid = req.params.id;
   //res.json({_id:uid});
@@ -136,6 +185,14 @@ router.get('/getUser/:id',function(req,res,next){
       });
 });
 
+/**
+ * Delete Single User
+ *
+ * @section Users
+ * @type get
+ * @url /deleteUser/:userid  
+ * @param {ObjectID} userid  
+ */
 router.get('/deleteUser/:userid',function(req,res,next){
   var uid = req.params.userid;
   console.log('Deleting User: '+uid);
@@ -183,7 +240,13 @@ router.post('/updateUser', function(req,res,next){
   });
 });
 
-/************************************************************************************************** */
+/**
+ * Get All Pages
+ *
+ * @section Pages
+ * @type get
+ * @url /pages 
+ */
 
 router.get('/pages', function(req,res,next){
    var PageSchema = require('../model/page');
@@ -199,7 +262,14 @@ router.get('/pages', function(req,res,next){
     
   });
 });
-
+/**
+ * Get Single Page By ID
+ *
+ * @section Pages
+ * @type get
+ * @url /page/:id
+ * @param {ObjectID} id 
+ */
 router.get('/page/:id', function(req,res,next){
   var pid = req.params.id;
   //res.json({_id:uid});
@@ -213,8 +283,15 @@ router.get('/page/:id', function(req,res,next){
         
       });
 });
-
-router.post('/page/add/:id', function(req,res,next){
+/**
+ * Add New Page
+ *
+ * @section Pages
+ * @type post
+ * @url /page/add/
+ * @param {ObjectID} xxx 
+ */
+router.post('/page/add/', function(req,res,next){
   
 });
 
@@ -249,7 +326,7 @@ router.post('/page/edit/:id', function(req,res,next){
 router.get('/page/delete/:id', function(req,res,next){
   
 });
-/**************************************************************************** */
+
 
 router.get('/allmedia', function(req,res,next){
   var MediaSchema = require('../model/media');
@@ -266,6 +343,18 @@ router.get('/allmedia', function(req,res,next){
  });
 });
 
+router.get('/media/delete/:id', function(req,res,next){
+  var MediaSchema = require('../model/media');
+  var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
+  var DelID = ObjectId(req.params.id);
+  MediaModel.deleteOne({'_id':DelID},function(err,dd){
+    if(err){res.json({'status':'Error'});}
+    res.json({'status':'success'});
+  });
+   
+
+});
+
 router.post('/addNewMedia', function(req,res,next){
 
 
@@ -277,7 +366,8 @@ router.post('/addNewMedia', function(req,res,next){
     _id       : ObjectId(),
     filename  : req.body.mediaUpload.filename,
     filetype  : req.body.mediaUpload.filetype,
-    value     : req.body.mediaUpload.value
+    value     : req.body.mediaUpload.value,
+    date      : new Date().toDateString()
   });
   
 

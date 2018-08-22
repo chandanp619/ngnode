@@ -148,7 +148,7 @@ export class EditUsersComponent implements OnInit {
     this.meta.removeAt(index);
   }
 
-
+/*
   UploadImage(){
     
     var mediaDATA = this.MediaForm.value;
@@ -180,7 +180,7 @@ export class EditUsersComponent implements OnInit {
         console.log(file);
       };
     }
-  }
+  }*/
 }
 
 class MediaImage{

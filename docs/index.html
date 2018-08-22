@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API REST API Documentation</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="api-doc-generator.min.css">
+</head>
+<body>
+  <main>
+    <nav class="navigation">
+      <section class="container">
+        <div class="row">
+          <div class="column">
+            <div class="title">API REST API Documentation</div>
+          </div>
+        </div>
+      </section>
+    </nav>
+
+    <section class="container">
+      <div class="row">
+        <div class="column">
+          <div class="sections">
+            <ul>
+              <li>
+                <a href="#Blogs">Blogs</a>
+              </li>
+              <li>
+                <a href="#Pages">Pages</a>
+              </li>
+              <li>
+                <a href="#Users">Users</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="row">
+        <div class="column">
+          <div class="section">
+            <div class="section-header">
+              <div class="section-title">
+                <a name="Blogs" class="section-toggle">Blogs</a>
+              </div>
+
+              <div class="actions">
+                <a class="section-toggle">Show/hide</a>
+                <a class="hide-description">List Operations</a>
+                <a class="show-description">Expand Operations</a>
+              </div>
+            </div>
+
+            <div class="endpoints">
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/blogs</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Get a list of visible blogs</p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div class="row">
+        <div class="column">
+          <div class="section">
+            <div class="section-header">
+              <div class="section-title">
+                <a name="Pages" class="section-toggle">Pages</a>
+              </div>
+
+              <div class="actions">
+                <a class="section-toggle">Show/hide</a>
+                <a class="hide-description">List Operations</a>
+                <a class="show-description">Expand Operations</a>
+              </div>
+            </div>
+
+            <div class="endpoints">
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/pages</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Get All Pages</p>
+
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/page/:id</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Get Single Page By ID</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>id</td>
+                      <td>ObjectID</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint post">
+                <div class="address toggle-description">
+                  <span class="label">post</span><span class="url">/page/add/</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Add New Page</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>xxx</td>
+                      <td>ObjectID</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div class="row">
+        <div class="column">
+          <div class="section">
+            <div class="section-header">
+              <div class="section-title">
+                <a name="Users" class="section-toggle">Users</a>
+              </div>
+
+              <div class="actions">
+                <a class="section-toggle">Show/hide</a>
+                <a class="hide-description">List Operations</a>
+                <a class="show-description">Expand Operations</a>
+              </div>
+            </div>
+
+            <div class="endpoints">
+              <div class="endpoint post">
+                <div class="address toggle-description">
+                  <span class="label">post</span><span class="url">/authenticate</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Authenticate an user</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>username</td>
+                      <td>string</td>
+                      <td>true</td>
+                    </tr>
+                    <tr>
+                      <td>password</td>
+                      <td>string</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/checksession</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Validate User Session</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>session</td>
+                      <td>Object</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/logout</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>User logout</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>session</td>
+                      <td>Object</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/allusers</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>All Users</p>
+
+                </div>
+              </div>
+              <div class="endpoint post">
+                <div class="address toggle-description">
+                  <span class="label">post</span><span class="url">/addNewUser</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Add New User</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>username</td>
+                      <td>String</td>
+                      <td>true</td>
+                    </tr>
+                    <tr>
+                      <td>password</td>
+                      <td>String</td>
+                      <td>true</td>
+                    </tr>
+                    <tr>
+                      <td>usertype</td>
+                      <td>String</td>
+                      <td>true</td>
+                    </tr>
+                    <tr>
+                      <td>email</td>
+                      <td>String</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/getUser/:id</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Get Single User</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>id</td>
+                      <td>ObjectID</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="endpoint get">
+                <div class="address toggle-description">
+                  <span class="label">get</span><span class="url">/deleteUser/:userid</span>
+                </div>
+
+                <div class="description hidden">
+                  <p>Delete Single User</p>
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>userid</td>
+                      <td>ObjectID</td>
+                      <td>true</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script type="text/javascript" src="api-doc-generator.min.js"></script>
+</body>
+</html>

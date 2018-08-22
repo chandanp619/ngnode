@@ -6,6 +6,7 @@ var MediaSchema = new mongoose.Schema({
     filename: String,
     filetype: String,
     value: String,
+    date: Date
 });
 
 module.exports = ({'MediaSchema':MediaSchema});
