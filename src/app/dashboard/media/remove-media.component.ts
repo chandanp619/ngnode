@@ -30,6 +30,7 @@ export class RemoveMediaComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 }

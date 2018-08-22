@@ -27,7 +27,7 @@ export class MediaComponent implements OnInit {
       }
     });
 
-    
+
     this._http.get('/api/allmedia').subscribe((response) => {
       this.Medias =  response;
     });
@@ -36,7 +36,6 @@ export class MediaComponent implements OnInit {
       mediaUpload: new FormControl()
     });
    }
-
 
   showControl(index){
 
