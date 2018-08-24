@@ -343,6 +343,22 @@ router.get('/allmedia', function(req,res,next){
  });
 });
 
+router.get('/getMedia/:id', function(req,res,next){
+  var MediaSchema = require('../model/media');
+  var MediaID = req.params.id;
+  var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
+  MediaModel.findOne({'_id':ObjectId(MediaID)},function(err,media){
+   if(err){console.log(err); }
+   //console.log(user);
+   if(media){
+       res.json(media);
+     }else{
+       res.send(false);
+     }
+   
+ });
+});
+
 router.get('/media/delete/:id', function(req,res,next){
   var MediaSchema = require('../model/media');
   var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');

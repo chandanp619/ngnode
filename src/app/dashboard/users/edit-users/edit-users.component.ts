@@ -21,6 +21,7 @@ export class EditUsersComponent implements OnInit {
   EditForm:FormGroup;
   MediaForm:FormGroup;
   meta: FormArray;
+  UserImage:MediaImage;
 
   constructor(private router:Router, private route:ActivatedRoute, private _http:HttpClient, private fb:FormBuilder, private global:Global){
   
@@ -48,6 +49,7 @@ export class EditUsersComponent implements OnInit {
           meta: this.fb.array([ this.CreateMetaField() ])
       });
   
+      this.getImage(this.model.image);
   
       this.MediaForm = this.fb.group({
         mediaUpload: new FormControl()
@@ -67,14 +69,20 @@ export class EditUsersComponent implements OnInit {
       error => console.log("Error: ", error)
      );
 
-
-
-
- 
-
-
-
    }
+
+getImage(MediaID){
+  this._http.get('/api/getMedia/'+MediaID).subscribe(
+    response => {
+      console.log(response);
+       this.UserImage = new MediaImage(response);
+      
+       //this.EditForm.get('image').setValue(this.UserImage.value);
+  });
+}
+
+
+
    ngOnInit() {}
 
 /*
@@ -118,6 +126,7 @@ export class EditUsersComponent implements OnInit {
     });
   }
 */
+
   submtUpdtUser(){
 
     console.log(this.model);
@@ -128,6 +137,17 @@ export class EditUsersComponent implements OnInit {
       console.log(JSON.stringify(this.StatusMessage));
      });
   }
+
+InsertMedia(){
+  this.EditForm.get('image').setValue(this.global.ImageID);
+  document.getElementById('ImageModal').style.display = 'none';
+  var elm = document.getElementsByClassName('modal-backdrop');
+  Array.from(elm).forEach(function(item){
+    item.remove();
+  });
+
+  this.getImage(this.global.ImageID);
+}
 
   CreateMetaField():FormGroup{
     return this.fb.group({

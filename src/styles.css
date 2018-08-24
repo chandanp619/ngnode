@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body{ background: url('assets/images/texture.png');}
+body{ background: url('assets/images/texture.png'); overflow: scroll;}
 a{text-decoration: none; color:#fff;}
 a:hover{ text-decoration: underline; color:#ddd;}
 nav ul.menu li{ display: inline-block;}

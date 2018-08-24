@@ -76,7 +76,7 @@
         <h4>Profile Picture</h4>
         <figure>
           <input type="hidden" name="image" id="image" formControlName="image" />
-          <img src="data:image/jpeg;base64,{{model.image}}" width="200"  />
+          <img src="data:image/jpeg;base64,{{UserImage.value}}" width="200" *ngIf="UserImage"  />
         </figure>
         <div class="form-group">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ImageModal">Choose Image</button>
@@ -113,7 +113,8 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Upload Media</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button class="btn ins_btn" (click)="InsertMedia()">Insert</button>
+          <button type="button" id="CloseImageModal" class="close" data-dismiss="modal">&times;</button>
         </div>
   
         <!-- Modal body -->

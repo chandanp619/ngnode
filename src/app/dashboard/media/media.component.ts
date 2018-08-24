@@ -95,7 +95,14 @@ export class MediaComponent implements OnInit {
       };
     }
   }
-
+  removeMedia(mediaID){
+    this._http.get('/api/media/delete/'+mediaID).subscribe((response) => {
+      this.global.ImageID = '';
+      this._http.get('/api/allmedia').subscribe((response) => {
+        this.Medias =  response;
+      });
+    });
+  }
 }
 
 class MediaImage{

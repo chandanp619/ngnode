@@ -41,7 +41,7 @@
                   <img src="data:{{media.filetype}};base64,{{media.value}}" (click)="showControl(i)" />
                   <div class="controls" id="controls-{{i}}" style="display:none;">
                       <input type="text" value="{{media._id}}" />
-                      <a class="action-link" routerLink="/dashboard/media/remove/{{media._id}}">Delete</a>
+                      <button class="action-link" (click)="removeMedia(media._id)">Delete</button>
                   </div>
                 </li>
           </ul>
