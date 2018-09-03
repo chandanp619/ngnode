@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
 var formidable = require('formidable');
 var fs = require('fs');
-
+var slugify = require('slugify');
 
 router.get('/', function(req, res, next) {
   res.send('Express RESTful API');
@@ -292,7 +292,26 @@ router.get('/page/:id', function(req,res,next){
  * @param {ObjectID} xxx 
  */
 router.post('/page/add/', function(req,res,next){
-  
+  var title = req.body.title;
+  var content = req.body.content;
+  var slug = slugify(title.toLowerCase());
+
+  var PageModelSchema = require('../model/page');
+  var pageModel = mongoose.model('ngnode_pages',PageModelSchema.PageSchema,'ngnode_pages');
+
+  var NewPage = new pageModel({
+    _id:ObjectId(),
+    title:title,
+    content:content,
+    slug:slug,
+    date:new Date().toDateString()
+  });
+
+  NewPage.save(function(err,Page){
+    if(err){console.log(err); }
+    res.json({'status':'success'});
+
+  });
 });
 
 router.post('/page/edit/:id', function(req,res,next){

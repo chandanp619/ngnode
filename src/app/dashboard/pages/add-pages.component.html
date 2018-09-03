@@ -26,9 +26,13 @@
               <input type="text" class="form-control" formControlName="title" id="title" name="title">
             </div>
             <div class="form-group">
-                <label for="username">Content:</label>
-                <textarea type="text" class="form-control" formControlName="content" id="content" name="content"></textarea>
-              </div>
+                <label for="content">Content:</label>
+                <app-tinymce formControlName='content' name="content" id="content" options='{ branding:false }'></app-tinymce>
+            </div>
+            <div class="form-group">
+              <button name="submt" (click)="SubmitAddPage();">Submit</button>
+          </div>
+
       </form>
     </div>
 

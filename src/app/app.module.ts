@@ -5,6 +5,8 @@ import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common'
 import {DataTableModule} from "angular-6-datatable";
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TinymceModule } from 'angular2-tinymce';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home.component';
@@ -48,6 +50,7 @@ import {Global} from './dashboard/global';
     
   ],
   imports: [
+    TinymceModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
