@@ -6,7 +6,8 @@ var MediaSchema = new mongoose.Schema({
     filename: String,
     filetype: String,
     value: String,
-    date: Date
+    date: Date,
+    user:{type:mongoose.Schema.Types.ObjectId, ref:'ngnode_users'}
 });
 
 
