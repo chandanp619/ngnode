@@ -249,9 +249,12 @@ router.post('/updateUser', function(req,res,next){
  */
 
 router.get('/pages', function(req,res,next){
+
+   var UserSchema = require('../model/user');
+   var UserModel = mongoose.model('ngnode_users',UserSchema.UserSchema);
    var PageSchema = require('../model/page');
    var PageModel = mongoose.model('ngnode_pages',PageSchema.PageSchema,'ngnode_pages');
-  PageModel.find({}).exec(function(err,pages){
+  PageModel.find({}).populate({path:'user',select:'username email'}).exec(function(err,pages){
     if(err){console.log(err); }
     //console.log(user);
     if(pages){
@@ -260,7 +263,7 @@ router.get('/pages', function(req,res,next){
         res.send(false);
       }
   
-      
+
   });
 });
 /**
@@ -296,6 +299,7 @@ router.post('/page/add/', function(req,res,next){
   var title = req.body.title;
   var content = req.body.content;
   var slug = slugify(title.toLowerCase());
+  var sess = req.session;
 
   var PageModelSchema = require('../model/page');
   var pageModel = mongoose.model('ngnode_pages',PageModelSchema.PageSchema,'ngnode_pages');
@@ -305,7 +309,8 @@ router.post('/page/add/', function(req,res,next){
     title:title,
     content:content,
     slug:slug,
-    date:new Date().toDateString()
+    date:new Date().toDateString(),
+    user:sess.user_id
   });
 
   NewPage.save(function(err,Page){
@@ -349,9 +354,11 @@ router.get('/page/delete/:id', function(req,res,next){
 
 
 router.get('/allmedia', function(req,res,next){
+  var UserSchema = require('../model/user');
+  var UserModel = mongoose.model('ngnode_users',UserSchema.UserSchema,'ngnode_users')
   var MediaSchema = require('../model/media');
   var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
-  MediaModel.find({}).exec(function(err,medias){
+  MediaModel.find({}).populate('user').exec(function(err,medias){
    if(err){console.log(err); }
    //console.log(user);
    if(medias){
@@ -397,13 +404,15 @@ router.post('/addNewMedia', function(req,res,next){
   var ObjectId = require('mongodb').ObjectID;
   var MediaSchema = require('../model/media');
   var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
+  var sess = req.session;
 
   var newMedia = new MediaModel({
     _id       : ObjectId(),
     filename  : req.body.mediaUpload.filename,
     filetype  : req.body.mediaUpload.filetype,
     value     : req.body.mediaUpload.value,
-    date      : new Date().toDateString()
+    date      : new Date().toDateString(),
+    user:sess.user_id
   });
   
 
