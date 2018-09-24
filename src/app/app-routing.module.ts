@@ -15,10 +15,13 @@ import { EditUsersComponent } from './dashboard/users/edit-users/edit-users.comp
 
 import { PagesComponent } from './dashboard/pages/pages.component';
 import { AddPagesComponent } from './dashboard/pages/add-pages.component';
+import { EditPagesComponent } from './dashboard/pages/edit-pages.component';
+import { DeletePagesComponent } from './dashboard/pages/delete-pages.component';
 
 import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media.component';
 import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
+
 
 
 const router: Routes = [
@@ -37,9 +40,9 @@ const router: Routes = [
   { path: 'dashboard/users/delete/:id', component: DeleteuserComponent},
 
   { path: 'dashboard/pages', component: PagesComponent},
-  { path: 'dashboard/page/edit/:id', component: PagesComponent},
-  { path: 'dashboard/page/delete/:id', component: PagesComponent},
+  { path: 'dashboard/page/delete/:id', component: DeletePagesComponent},
   { path: 'dashboard/page/add', component: AddPagesComponent},
+  { path: 'dashboard/page/edit/:id', component: EditPagesComponent },
 
   { path: 'dashboard/media', component: MediaComponent},
   { path: 'dashboard/media/add', component: AddMediaComponent},

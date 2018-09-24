@@ -26,6 +26,8 @@ import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media.component';
 import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
 import {Global} from './dashboard/global';
+import { DeletePagesComponent } from './dashboard/pages/delete-pages.component';
+import { EditPagesComponent } from './dashboard/pages/edit-pages.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import {Global} from './dashboard/global';
     MediaComponent,
     AddMediaComponent,
     RemoveMediaComponent,
+    DeletePagesComponent,
+    EditPagesComponent,
     
   ],
   imports: [

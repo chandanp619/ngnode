@@ -32,9 +32,9 @@ export class DashboardComponent implements OnInit {
   }
 
   submitLogin(){
-    console.log('Form Submission Working...'+JSON.stringify(this.model));
+    //console.log('Form Submission Working...'+JSON.stringify(this.model));
     this._http.post('/api/authenticate',this.model).subscribe((response) => {
-      console.log(response);
+      //console.log(response);
       this.AuthStatus  = Boolean(response);
     });
 

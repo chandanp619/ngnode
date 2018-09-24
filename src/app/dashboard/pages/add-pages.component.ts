@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder , FormArray} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 declare var $:any;
@@ -14,6 +14,7 @@ export class AddPagesComponent implements OnInit {
   AuthStatus:any;
   addPageForm:FormGroup;
   StatusMessage:any;
+  meta: FormArray;
   constructor(private router:Router, private fb:FormBuilder,private _http:HttpClient) { 
 
     this._http.get('/api/checksession').subscribe((response) => {
@@ -29,7 +30,8 @@ export class AddPagesComponent implements OnInit {
     this.addPageForm = this.fb.group({
       title:new FormControl(),
       content:new FormControl(),
-      slug: new FormControl()
+      slug: new FormControl(),
+      meta: this.fb.array([ this.CreateMetaField() ])
     });
 
   
@@ -49,6 +51,25 @@ export class AddPagesComponent implements OnInit {
       this.StatusMessage = output.status;
       console.log(JSON.stringify(this.StatusMessage));
      });
+  }
+
+
+  CreateMetaField():FormGroup{
+    return this.fb.group({
+      key: new FormControl(''),
+      value: new FormControl('')
+    });
+  }
+  AddMore():void{
+    console.log('Creating Field');
+    this.meta = this.addPageForm.get('meta') as FormArray;
+    this.meta.push(this.CreateMetaField());
+  }
+
+
+  RemoveMeta(index:number):void{
+    this.meta = this.addPageForm.get('meta') as FormArray;
+    this.meta.removeAt(index);
   }
 
 }

@@ -34,13 +34,13 @@
               </form>
         </div>
         <div class="row">
-          <div class="col-md-12"> {{global.ImageID}}</div>
+          <div class="col-md-12"></div>
           <div class="col-md-12">
           <ul class="media-container" id="media-container">
               <li *ngFor="let media of Medias; let i=index">
                   <img src="data:{{media.filetype}};base64,{{media.value}}" (click)="showControl(i)" />
                   <div class="controls" id="controls-{{i}}" style="display:none;">
-                      <input type="text" value="{{media._id}}" />
+                      <input type="text" value="&lt;img src='data:{{media.filetype}};base64,{{media.value}}'&gt;" />
                       <button class="action-link" (click)="removeMedia(media._id)">Delete</button>
                   </div>
                 </li>

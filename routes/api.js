@@ -287,6 +287,17 @@ router.get('/page/:id', function(req,res,next){
         
       });
 });
+
+router.get('/page/slug/:slug', function(req,res,next){
+  var slug = req.params.slug;
+  var PageSchema = require('../model/page');
+  var pageModel = mongoose.model('ngnode_pages',PageSchema.PageSchema,'ngnode_pages');
+      pageModel.findOne({"slug":slug},function(err,page){
+        if(err){res.json({"error":"Page Not Found"});}else{
+          res.json(page);
+        }
+      });
+});
 /**
  * Add New Page
  *
@@ -300,17 +311,26 @@ router.post('/page/add/', function(req,res,next){
   var content = req.body.content;
   var slug = slugify(title.toLowerCase());
   var sess = req.session;
-
+  var metaData = req.body.meta;
   var PageModelSchema = require('../model/page');
   var pageModel = mongoose.model('ngnode_pages',PageModelSchema.PageSchema,'ngnode_pages');
+
+  var DataMeta = [];
+
+  metaData.forEach(function(element){
+    if(element.key!=""){
+      DataMeta.push(element);
+    }
+  });
 
   var NewPage = new pageModel({
     _id:ObjectId(),
     title:title,
     content:content,
     slug:slug,
-    date:new Date().toDateString(),
-    user:sess.user_id
+    date:new Date().toLocaleDateString(),
+    user:sess.user_id,
+    meta:DataMeta
   });
 
   NewPage.save(function(err,Page){
@@ -322,14 +342,15 @@ router.post('/page/add/', function(req,res,next){
 
 router.post('/page/edit/:id', function(req,res,next){
   var PageSchema = require('../model/page');
-  var pageModel = mongoose.model('ngnode_pages',UserSchema.UserSchema,'ngnode_pages');
-
+  var pageModel = mongoose.model('ngnode_pages',PageSchema.PageSchema,'ngnode_pages');
+  var id = req.params.id;
+  var sess = req.session;
   var input_title = req.body.title;
   var input_slug = req.body.slug;
   var input_date = new Date().toDateString();
   var input_content = req.body.content;
   var metaData = req.body.meta;
-  
+  var input_user = sess.user_id;
   var DataMeta = [];
 
   metaData.forEach(function(element){
@@ -339,9 +360,9 @@ router.post('/page/edit/:id', function(req,res,next){
   });
     
 
-  var ExistingPageNewData = {title:input_title,slug:input_slug,date:input_date,content:input_content,meta:DataMeta};
+  var ExistingPageNewData = {title:input_title,slug:input_slug,date:input_date,content:input_content,meta:DataMeta,user:input_user};
   console.log(ExistingPageNewData);
-  userModel.update({"_id":ObjectId(id)},ExistingPageNewData, { multi: true }, function(err,user){
+  pageModel.update({"_id":ObjectId(id)},ExistingPageNewData, { multi: true }, function(err,user){
     if(err){console.log(err); res.json({"status":"Error in Updating Page"}); }
     
         res.json({"status":"Page Updated Successfully",userd:user});
@@ -349,7 +370,18 @@ router.post('/page/edit/:id', function(req,res,next){
 });
 
 router.get('/page/delete/:id', function(req,res,next){
-  
+  var PageID = req.params.id;
+  console.log('PG:'+PageID);
+  var PageSchema = require('../model/page');
+  var pageModel = mongoose.model('ngnode_pages',PageSchema.PageSchema,'ngnode_pages');
+
+  pageModel.deleteOne({"_id":ObjectId(PageID)},function(err){
+    if(err){
+      res.send('0');
+    }else{
+      res.send('1');
+    }
+  });
 });
 
 
