@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:chownr:20180731':
+    - npm > pacote > make-fetch-happen > cacache > chownr:
+        reason: wait for updates
+        expires: '2018-10-26T05:42:01.240Z'
+    - npm > libcipm > pacote > tar > chownr:
+        reason: None given
+        expires: '2018-10-26T05:42:01.240Z'
+    - npm > npm-registry-fetch > make-fetch-happen > cacache > chownr:
+        reason: None given
+        expires: '2018-10-26T05:42:01.240Z'
+    - npm > libnpmhook > npm-registry-fetch > make-fetch-happen > cacache > chownr:
+        reason: None given
+        expires: '2018-10-26T05:42:01.240Z'
+patch: {}

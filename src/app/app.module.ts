@@ -28,6 +28,7 @@ import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
 import {Global} from './dashboard/global';
 import { DeletePagesComponent } from './dashboard/pages/delete-pages.component';
 import { EditPagesComponent } from './dashboard/pages/edit-pages.component';
+import { MediaModalComponent } from './dashboard/media/media-modal.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { EditPagesComponent } from './dashboard/pages/edit-pages.component';
     RemoveMediaComponent,
     DeletePagesComponent,
     EditPagesComponent,
+    MediaModalComponent,
     
   ],
   imports: [
