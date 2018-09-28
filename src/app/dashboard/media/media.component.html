@@ -12,6 +12,7 @@
                 <li class="nav-item"><a class="nav-link" routerLink="/dashboard/pages">Pages</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/dashboard/media">Media</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users">Users</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/settings">Settings</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/dashboard/users/logout">Logout</a> </li>
             </ul>
           </div>
@@ -40,7 +41,8 @@
               <li *ngFor="let media of Medias; let i=index">
                   <img src="data:{{media.filetype}};base64,{{media.value}}" (click)="showControl(i)" />
                   <div class="controls" id="controls-{{i}}" style="display:none;">
-                      <input type="text" value="&lt;img src='data:{{media.filetype}};base64,{{media.value}}'&gt;" />
+                      <input type="hidden" value="{{media._id}}" />
+                      <textarea class="form-control"><img src="data:{{media.filetype}};base64,{{media.value}}" /></textarea>
                       <button class="action-link" (click)="removeMedia(media._id)">Delete</button>
                   </div>
                 </li>

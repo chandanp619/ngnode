@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router,  ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Global } from '../global';
+import * as jQuery from 'jquery';
+
+//declare var jQuery:any;
 
 @Component({
   selector: 'app-media',
@@ -10,9 +13,12 @@ import { Global } from '../global';
   styleUrls: ['./media.component.css']
 })
 export class MediaComponent implements OnInit {
+  
   Medias:any = [];
+  XMedias:any = [];
   AuthStatus:Boolean;
   MediaForm:FormGroup;
+  activeImage:String;
   constructor( private _http:HttpClient, private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder, private global:Global) {
 
     
@@ -29,36 +35,50 @@ export class MediaComponent implements OnInit {
 
 
     this._http.get('/api/allmedia').subscribe((response) => {
-      this.Medias =  response;
+      console.log(response);
+        this.Medias = response;
     });
 
     this.MediaForm = this.fb.group({
       mediaUpload: new FormControl()
     });
-   }
+ 
+  }
 
   showControl(index){
-
-    var pelm = document.getElementById('media-container');
-    Array.from(document.querySelectorAll('.controls')).forEach(function(item){
-        (<HTMLElement>item).style.display='none';
-    });
+    
+    // var pelm = document.getElementById('media-container');
+    // Array.from(document.querySelectorAll('.controls')).forEach(function(item){
+    //     (<HTMLElement>item).style.display='none';
+    // });
     
        
      
 
-     var elm = document.getElementById('controls-'+index);
-     var style = window.getComputedStyle(elm);
-     if(style.display=='block'){
-       elm.style.display='none';
-       this.global.ImageID = '';
-     }else{
-      elm.style.display='block';
-      this.global.ImageID = elm.querySelector('input').value;
-     }
+    //  var elm = document.getElementById('controls-'+index);
+    //  var style = window.getComputedStyle(elm);
+    //  if(style.display=='block'){
+    //    elm.style.display='none';
+    //    this.global.ImageID = '';
+    //  }else{
+    //   elm.style.display='block';
+    //   this.global.ImageID = elm.querySelector('input').value;
+
+
+
+      
+    //  }
    }
 
-  ngOnInit() {
+   ngOnInit() {
+    jQuery(document).ready(function(){
+      jQuery('#media-container img').click(function(){
+        alert('hello!!!!');
+        jQuery('#media-container .controls').css({'display':'none'});
+        jQuery(this).siblings('.controls').css({'display':'block'});
+      });
+      
+    });
   }
 
   UploadImage(){
@@ -76,6 +96,8 @@ export class MediaComponent implements OnInit {
       this._http.get('/api/allmedia').subscribe((response) => {
         this.Medias =  response;
       });
+      var elm_inp = document.getElementById('mediaUpload');
+      elm_inp.setAttribute("value","");
      });
   }
 
