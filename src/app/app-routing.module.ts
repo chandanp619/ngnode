@@ -21,7 +21,7 @@ import { DeletePagesComponent } from './dashboard/pages/delete-pages.component';
 import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media.component';
 import { RemoveMediaComponent } from './dashboard/media/remove-media.component';
-
+import { AuthenticationGuard } from './dashboard/authentication.guard';
 
 
 const router: Routes = [
@@ -32,21 +32,21 @@ const router: Routes = [
   { path: '*', component: ErrorComponent },
 
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'dashboard/users', component: UsersComponent },
-  { path: 'dashboard/users/page/:paged', component: UsersComponent },
+  { path: 'dashboard/users', component: UsersComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/users/page/:paged', component: UsersComponent, canActivate: [AuthenticationGuard]  },
   { path: 'dashboard/users/logout', component: LogoutComponent },
-  { path: 'dashboard/users/add', component: AddusersComponent},
-  { path: 'dashboard/users/edit/:id', component: EditUsersComponent},
-  { path: 'dashboard/users/delete/:id', component: DeleteuserComponent},
+  { path: 'dashboard/users/add', component: AddusersComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/users/edit/:id', component: EditUsersComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/users/delete/:id', component: DeleteuserComponent, canActivate: [AuthenticationGuard] },
 
-  { path: 'dashboard/pages', component: PagesComponent},
-  { path: 'dashboard/page/delete/:id', component: DeletePagesComponent},
-  { path: 'dashboard/page/add', component: AddPagesComponent},
-  { path: 'dashboard/page/edit/:id', component: EditPagesComponent },
+  { path: 'dashboard/pages', component: PagesComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/page/delete/:id', component: DeletePagesComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/page/add', component: AddPagesComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/page/edit/:id', component: EditPagesComponent, canActivate: [AuthenticationGuard]  },
 
-  { path: 'dashboard/media', component: MediaComponent},
-  { path: 'dashboard/media/add', component: AddMediaComponent},
-  { path: 'dashboard/media/remove/:id', component: RemoveMediaComponent},
+  { path: 'dashboard/media', component: MediaComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/media/add', component: AddMediaComponent, canActivate: [AuthenticationGuard] },
+  { path: 'dashboard/media/remove/:id', component: RemoveMediaComponent, canActivate: [AuthenticationGuard] },
 ];
 
 

@@ -16,14 +16,7 @@ export class EditPagesComponent implements OnInit {
   model:any;
   pageID:any;
   constructor(private router:Router,private route:ActivatedRoute, private fb:FormBuilder,private _http:HttpClient) { 
-    this._http.get('/api/checksession').subscribe((response) => {
-      if(Boolean(response)==false){
-        this.AuthStatus  = Boolean(response);
-        router.navigateByUrl('/dashboard');
-      }else{
-      this.AuthStatus  = Boolean(response);
-      }
-    });
+ 
 
     this.pageID = this.route.snapshot.params.id;
 

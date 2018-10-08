@@ -14,13 +14,6 @@ export class DeletePagesComponent implements OnInit {
   AuthStatusMessage:String ='';
   status:any;
   constructor(private _http:HttpClient,private activeRoute:ActivatedRoute, private router:Router) { 
-    this._http.get('/api/checksession').subscribe((response) => {
-      if(Boolean(response)==false)
-        this.AuthStatus  = Boolean(response);
-      else
-      this.AuthStatus  = Boolean(response);
-      console.log('checksession Response:'+response.toString());
-    });
 
     var pageID = this.activeRoute.snapshot.params.id;
     console.log('Deleting page:'+pageID);

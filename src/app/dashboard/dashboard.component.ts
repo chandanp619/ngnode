@@ -36,6 +36,8 @@ export class DashboardComponent implements OnInit {
     this._http.post('/api/authenticate',this.model).subscribe((response) => {
       //console.log(response);
       this.AuthStatus  = Boolean(response);
+
+      localStorage.setItem('AuthToken','true');
     });
 
     if(this.AuthStatus==true){

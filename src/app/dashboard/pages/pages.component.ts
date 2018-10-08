@@ -14,16 +14,6 @@ AuthStatus:Boolean;
   constructor( private _http:HttpClient, private router:Router) {
 
     
-    this._http.get('/api/checksession').subscribe((response) => {
-      //console.log('I am Constructor...');
-      if(Boolean(response)==false){
-        this.AuthStatus  = Boolean(response);
-        router.navigateByUrl('/dashboard');
-      }else{
-      this.AuthStatus  = Boolean(response);
-      //console.log('checksession Response:'+response.toString());
-      }
-    });
 
     this._http.get('/api/allusers').subscribe((response) => {
       this.Pages =  response;

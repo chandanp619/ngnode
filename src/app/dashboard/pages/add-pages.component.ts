@@ -17,16 +17,6 @@ export class AddPagesComponent implements OnInit {
   meta: FormArray;
   constructor(private router:Router, private fb:FormBuilder,private _http:HttpClient) { 
 
-    this._http.get('/api/checksession').subscribe((response) => {
-      if(Boolean(response)==false){
-        this.AuthStatus  = Boolean(response);
-        router.navigateByUrl('/dashboard');
-      }else{
-      this.AuthStatus  = Boolean(response);
-      }
-    });
-
-
     this.addPageForm = this.fb.group({
       title:new FormControl(),
       content:new FormControl(),

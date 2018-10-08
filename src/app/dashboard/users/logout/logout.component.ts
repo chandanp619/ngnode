@@ -15,6 +15,7 @@ export class LogoutComponent implements OnInit {
       if(Boolean(response) == true){
         this.AuthStatus = false;
         this.AuthStatusMessage = '';
+        localStorage.setItem('AuthToken','false');
         this.router.navigate(['/dashboard']);
       }
     });

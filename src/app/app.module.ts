@@ -6,7 +6,7 @@ import {DataTableModule} from "angular-6-datatable";
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TinymceModule } from 'angular2-tinymce';
-
+import { AuthenticationGuard } from './dashboard/authentication.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home.component';
@@ -64,7 +64,7 @@ import { MediaModalComponent } from './dashboard/media/media-modal.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},Global],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},Global,AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
