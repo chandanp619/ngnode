@@ -9,9 +9,8 @@ export class AuthService {
 
   constructor(private _http:HttpClient) { }
 
-  login(username:String,password:String):boolean{
-
-    return true;
+  login(data:any){
+    return  this._http.post('/api/authenticate',data);
   }
 
   logout():boolean{

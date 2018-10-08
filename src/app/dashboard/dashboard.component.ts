@@ -3,7 +3,7 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { BOOL_TYPE } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common'
-
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   model:any = {};
   AuthStatus:Boolean ;
   AuthStatusMessage:String ='';
-  constructor(private _http:HttpClient, private router:Router, private location:PlatformLocation) {
+  constructor(private auth:AuthService,private _http:HttpClient, private router:Router, private location:PlatformLocation) {
     location.onPopState(() => {
       console.log('back pressed');
   });
@@ -32,19 +32,26 @@ export class DashboardComponent implements OnInit {
   }
 
   submitLogin(){
-    //console.log('Form Submission Working...'+JSON.stringify(this.model));
-    this._http.post('/api/authenticate',this.model).subscribe((response) => {
-      //console.log(response);
-      this.AuthStatus  = Boolean(response);
 
-      localStorage.setItem('AuthToken','true');
-    });
+    this.auth.login(this.model).subscribe(
+      (res)=>{ 
+                  if(res ==true){
+                    this.AuthStatus=true;
+                    this.AuthStatusMessage = 'User Authenticated Successfully';
+                  }else{
+                    this.AuthStatus=false;
+                    this.AuthStatusMessage = 'User Authenticated Failed';
+                  }
+            },
+      (error)=>{
+        this.AuthStatus=false;
+        console.log(error);
+      }
+    );
 
-    if(this.AuthStatus==true){
-      this.AuthStatusMessage = 'User Authenticated Successfully';
-    }else{
-      this.AuthStatusMessage = 'User Authenticated Failed';
-    }
+    
+
+    
   }
 
 
