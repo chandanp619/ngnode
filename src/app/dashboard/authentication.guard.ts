@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AuthenticationGuard implements CanActivate {
 status:any;
-  constructor(private auth:AuthService){
+  constructor(private auth:AuthService, private route:Router){
 
   }
 
@@ -19,6 +19,7 @@ status:any;
       if(this.getValueFromServ() == true){
         return true;
       }else{
+        this.route.navigateByUrl('/dashboard');
         return false;
       }
    

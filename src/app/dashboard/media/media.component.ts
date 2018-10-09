@@ -45,29 +45,13 @@ export class MediaComponent implements OnInit {
  
   }
 
-  showControl(index){
-    
-    // var pelm = document.getElementById('media-container');
-    // Array.from(document.querySelectorAll('.controls')).forEach(function(item){
-    //     (<HTMLElement>item).style.display='none';
-    // });
-    
-       
-     
+  SelectedMedia:MediaImage;
+  showControl(media_id){
+    this._http.get('/api/getMedia/'+media_id).subscribe((response) => {
+      console.log(response);
+        this.SelectedMedia = new MediaImage(response);
+    });
 
-    //  var elm = document.getElementById('controls-'+index);
-    //  var style = window.getComputedStyle(elm);
-    //  if(style.display=='block'){
-    //    elm.style.display='none';
-    //    this.global.ImageID = '';
-    //  }else{
-    //   elm.style.display='block';
-    //   this.global.ImageID = elm.querySelector('input').value;
-
-
-
-      
-    //  }
    }
 
    ngOnInit() {
@@ -124,6 +108,7 @@ export class MediaComponent implements OnInit {
         this.Medias =  response;
       });
     });
+    //window.location.reload();
   }
 }
 
@@ -132,10 +117,14 @@ class MediaImage{
   filename:String;
   filetype:String;
   value:Blob;
+  path:String;
+  url:String;
   constructor(obj){
     this._id = obj._id;
     this.filename = obj.filename;
     this.filetype = obj.filetype;
     this.value = obj.value;
+    this.path = obj.path;
+    this.url = obj.url;
   }
 }

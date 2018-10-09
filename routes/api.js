@@ -6,6 +6,8 @@ var formidable = require('formidable');
 var fs = require('fs');
 var slugify = require('slugify');
 
+const crypto = require('crypto');
+
 router.get('/', function(req, res, next) {
   res.send('Express RESTful API');
 });
@@ -419,38 +421,68 @@ router.get('/getMedia/:id', function(req,res,next){
 });
 
 router.get('/media/delete/:id', function(req,res,next){
+  var DelID = ObjectId(req.params.id);
   var MediaSchema = require('../model/media');
   var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
-  var DelID = ObjectId(req.params.id);
-  MediaModel.deleteOne({'_id':DelID},function(err,dd){
-    if(err){res.json({'status':'Error'});}
-    res.json({'status':'success'});
+  var delMedia = null;
+  MediaModel.findOne({'_id':DelID},function(err,data){
+    if(err){res.status(400).json({'status':'Error'});}
+    delMedia = data;
+
+        MediaModel.deleteOne({'_id':DelID},function(err,dd){
+          if(err){res.status(400).json({'status':'Error'});}
+          fs.unlink(delMedia.path);
+          res.status(200).json({'status':'success'});
+        });
+
   });
+
+  
+  
    
 
 });
 
 router.post('/addNewMedia', function(req,res,next){
 
-
+//console.log(req);
   var ObjectId = require('mongodb').ObjectID;
   var MediaSchema = require('../model/media');
   var MediaModel = mongoose.model('ngnode_media',MediaSchema.MediaSchema,'ngnode_media');
   var sess = req.session;
-
+  var namearr = req.body.mediaUpload.filename.split(".").reverse();
+  var ext = namearr[0];
+  const secret = 'abcdefg';
+  const hashName = crypto.createHmac('sha256', secret).update(req.body.mediaUpload.filename).digest('hex');
+  var buf = new Buffer(req.body.mediaUpload.value, 'base64');
+  var full_path = './resources/uploads/'+hashName+"."+ext;
+  var full_url = 'resources/uploads/'+hashName+"."+ext;
   var newMedia = new MediaModel({
     _id       : ObjectId(),
     filename  : req.body.mediaUpload.filename,
     filetype  : req.body.mediaUpload.filetype,
     value     : req.body.mediaUpload.value,
     date      : new Date().toDateString(),
+    path      : full_path,
+    url       : full_url,
     user:sess.user_id
   });
-  
 
-  newMedia.save(function(err,media){
-    res.send(media);
+  fs.writeFile(full_path,buf,function(err){
+    if(err) throw err;
+
+    newMedia.save(function(err,media){
+      if (err) throw err;
+      res.status(200).send(media);
+    });
+
   });
+
+
+  
+  
+  
+  
   
   
 });
