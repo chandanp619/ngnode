@@ -94,7 +94,8 @@ export class MediaComponent implements OnInit {
         this.MediaForm.get('mediaUpload').setValue({
           filename: file.name,
           filetype: file.type,
-          value: reader.result.split(',')[1]
+          value: reader.result[1]
+          //.split(',')
         });
 
         console.log(file);
