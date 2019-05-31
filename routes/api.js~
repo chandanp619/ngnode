@@ -502,7 +502,7 @@ router.get('/menu/:id', function(req,res,next){
 		
   	
     if(err){res.status(400).json({'status':'Error'});}
- 		res.status(200).send(JSON.stringify(data));
+ 		res.status(200).send(json.stringify(data));
  		
   });
  });

@@ -18,34 +18,31 @@
       </nav>
     </div>
     <div class="row" >
-      <h2 class="text-center">Add New Page</h2>
+      <h2 class="text-center">Add New Menu</h2>
     </div>
 
     <div class="row">
-      <form [formGroup]="addPageForm" novalidate autocomplete="off">
+      <form [formGroup]="addMenuForm" novalidate autocomplete="off">
           <div class="form-group">
               <label for="title">Title:</label>
               <input type="text" class="form-control" formControlName="title" id="title" name="title">
             </div>
-            <div class="form-group">
-                <label for="content">Content:</label>
-                <app-tinymce formControlName='content' name="content" id="content" options='{ branding:false }'></app-tinymce>
-            </div>
-
-
-            <h4>Additional Data | <span class="add-more" (click)="AddMore()"> + </span></h4>
-            <div class="form-group" formArrayName="meta" *ngFor="let item of addPageForm.get('meta').controls; let i = index;">
+            
+            <h4>Items | <span class="add-more" (click)="AddMore()"> + </span></h4>
+            <div class="form-group" formArrayName="items" *ngFor="let item of addPageForm.get('items').controls; let i = index;">
               <div [formGroupName]="i">
                 <div class="row">
-                  <div class="col-md-6"><input class="form-control" formControlName="key" placeholder="Key"></div>
-                  <div class="col-md-4"><textarea class="form-control" formControlName="value" placeholder="Value"></textarea></div>
-                  <div class="col-md-2"><span class="add-more" (click)="RemoveMeta(i)"> - </span></div>
+                  <div class="col-md-6"><input class="form-control" formControlName="item_title" placeholder="Item Title"></div>
+                  <div class="col-md-4"><input class="form-control" formControlName="slug" placeholder="Slug"></div>
+						<div class="col-md-4"><input class="form-control" formControlName="target" placeholder="Target"></div>
+						<div class="col-md-4"><input class="form-control" formControlName="custom_class" placeholder="Custom Class"></div>
+                  <div class="col-md-2"><span class="add-more" (click)="RemoveItem(i)"> - </span></div>
                 </div>
               </div>
             </div>
             
             <div class="form-group">
-              <button name="submt" (click)="SubmitAddPage();">Submit</button>
+              <button name="submt" (click)="SubmitAddMenu();">Submit</button>
           </div>
 
       </form>
