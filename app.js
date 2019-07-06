@@ -14,8 +14,8 @@ var app = express();
 
 //app.use(bodyParser.json({limit: '150mb'}));
 //app.use(bodyParser.urlencoded({limit: '150mb', extended: false}));
-var dblink = 'mongodb://dbuser09:option123@cluster0-shard-00-00-3qiop.mongodb.net:27017,cluster0-shard-00-01-3qiop.mongodb.net:27017,cluster0-shard-00-02-3qiop.mongodb.net:27017/ngnode?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
-// 'mongodb://127.0.0.1:27017/ngnode'
+//var dblink = 'mongodb://dbuser09:option123@cluster0-shard-00-00-3qiop.mongodb.net:27017,cluster0-shard-00-01-3qiop.mongodb.net:27017,cluster0-shard-00-02-3qiop.mongodb.net:27017/ngnode?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+var dblink =  'mongodb://127.0.0.1:27017/ngnode';
 const db = mongoose.connect(dblink, { useNewUrlParser: true },function(err){
   if(err)
     console.log('Unable to connect database');
